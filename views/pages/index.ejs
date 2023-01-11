@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="talk">Talk</button>
+    <h3 class="input"></h3>
+    <h4 class="output"></h4>
+    
+    <script>
+        const btn = document.querySelector('.talk');
+const input = document.querySelector('.input');
+const output = document.querySelector('.output');
+
+const greetings = ["i'm good", "doing good", "just finished a beer, going through some though shit lately."];
+const weather = ["it is hot today", "it is quite cold today", "well, currently, the weather is a bit warm. it is about 26 degree celsius outside"];
+const intro = ["i am an artificial intelligence software made by easy I.T. pro. i can answer any question and i can even talk with you if you need someone to talk with. soon, i will be equipt with open a.i and would be able to answer you better. so what would you have me do for you ?"];
+const funQuestion = ["hello there, what's up?","well, hello. need something?", "hey, what do you want?"]
+const name = ["i am hector, your A.I. personal assistant", "the name's hector, your personal A.I. assistant", "Hector. your own A.I. assistant"];
+const func = ["with artificial intelligence, i am able to give you a ninety percent correct answer to any question you ask"];
+
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.onstart = function() {
+    console.log("voice is activated");
+};
+
+recognition.onresult = function(event) {
+    const current = event.resultIndex;
+
+    const transcript = event.results[current][0].transcript;
+    input.textContent = transcript;
+    readOutLoud(transcript);
+
+};
+
+//add listener to d btn
+
+btn.addEventListener('click', () => {
+    recognition.start();
+});
+
+function readOutLoud(message) {
+
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = "now you saying shit";
+
+    //greeting
+    if (message.includes("how are you")) {
+        const finalText = greetings[Math.floor(Math.random() * greetings.length)];
+        speech.text = finalText;
+    };
+
+    //weather
+    if (message.includes("how is the weather")) {
+        const finalText = weather[Math.floor(Math.random() * weather.length)];
+        speech.text = finalText;
+    };
+
+    //fun question
+    if (message.includes("hi")) {
+        const finalText = funQuestion[Math.floor(Math.random() * funQuestion.length)];
+        speech.text = finalText;
+    };
+
+    if (message.includes("hello")) {
+        const finalText = funQuestion[Math.floor(Math.random() * funQuestion.length)];
+        speech.text = finalText;
+    };
+
+    if (message.includes("hey")) {
+        const finalText = funQuestion[Math.floor(Math.random() * funQuestion.length)];
+        speech.text = finalText;
+    };
+    
+    //intro
+    if (message.includes("who are you")) {
+        const finalText = intro[Math.floor(Math.random() * intro.length)];
+        speech.text = finalText;
+    }
+
+    if (message.includes("who you are")) {
+        const finalText = intro[Math.floor(Math.random() * intro.length)];
+        speech.text = finalText;
+    }
+    
+    if (message.includes("what you are")) {
+        const finalText = intro[Math.floor(Math.random() * intro.length)];
+        speech.text = finalText;
+    }
+
+    if (message.includes("what are you")) {
+        const finalText = intro[Math.floor(Math.random() * intro.length)];
+        speech.text = finalText;
+    }
+   
+    //name
+    if (message.includes("what is your name")) {
+        const finalText = name[Math.floor(Math.random() * name.length)];
+        speech.text = finalText;
+    }
+
+    if (message.includes("your name")) {
+        const finalText = name[Math.floor(Math.random() * name.length)];
+        speech.text = finalText;
+    }
+
+    //function
+    if (message.includes("what do you do")) {
+        const finalText = func[Math.floor(Math.random() * func.length)];
+        speech.text = finalText;
+    }
+
+    if (message.includes("your duty")) {
+        const finalText = func[Math.floor(Math.random() * func.length)];
+        speech.text = finalText;
+    }
+
+    if (message.includes("your job")) {
+        const finalText = func[Math.floor(Math.random() * func.length)];
+        speech.text = finalText;
+    }
+    output.textContent = speech.text;
+
+
+
+    speech.volume = 1;
+    speech.rate = 0.9;
+    speech.pitch = 0.8;
+
+    window.speechSynthesis.speak(speech);
+}
+    </script>
+</body>
+
+</html>
